@@ -20,9 +20,19 @@ namespace BMICalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        double BMI;
-        double height;
-        double weight;
+        public class Customer
+        {
+            public string lastName { get; set; }
+            public string firstName { get; set; }
+            public string phoneNumber { get; set; }
+            public int heightInches { get; set; }
+            public int weightLbs { get; set; }
+            public int custBMI { get; set; }
+            public string statusTitle { get; set; }
+        }
+
+
+      
         public MainWindow()
         {
             InitializeComponent();
@@ -44,23 +54,39 @@ namespace BMICalculator
 
         private void xSubmit_Click(object sender, RoutedEventArgs e)
         {
-            height = Convert.ToDouble(xHeight.Text);
-            weight = Convert.ToDouble(xWeight.Text);
+            Customer customer1 = new Customer();
 
-            BMI = (weight / Math.Pow(height, 2)) * 703;
-            xBMI.Text = Convert.ToString(BMI);
+            customer1.lastName = xLastName.Text;
+            customer1.firstName = xFirstName.Text;
+            customer1.phoneNumber = xPhone.Text;
 
-            if (BMI < 18.5)
+            int currentWeight = 0;
+            int currentHeight = 0;
+            Int32.TryParse(xWeight.Text, out currentWeight);
+            Int32.TryParse(xHeight.Text, out currentHeight);
+            customer1.weightLbs = currentWeight;
+            customer1.heightInches = currentHeight;
+
+            int bmi;
+            bmi = 703 * customer1.weightLbs / (customer1.heightInches * customer1.heightInches);
+            customer1.custBMI = bmi;
+
+            string yourBMIstatus = "NA";
+            customer1.statusTitle = yourBMIstatus;
+
+            xBMI.Text = Convert.ToString(bmi);
+
+            if (bmi < 18.5)
             {
                 //under weight
                 xBMIText.Text = "According to CDC.gov you are under weight.";
             }
-            else if (BMI > 29.9)
+            else if (bmi > 29.9)
             {
                 //obese
                 xBMIText.Text = "According to CDC.gov you are obese.";
             }
-            else if ( BMI > 24.9)
+            else if (bmi > 24.9)
             {
                 //over weight
                 xBMIText.Text = "According to CDC.gov you are over weight.";
@@ -70,6 +96,7 @@ namespace BMICalculator
                 //normal
                 xBMIText.Text = "According to CDC.gov you are the normal weight.";
             }
+            //MessageBox.Show($"The Customer's name is {customer1.firstName} {customer1.lastName} and they can be reached at {customer1.phoneNumber}. They are {customer1.heightInches} inches tall. Their weight is {customer1.weightLbs}. Their BMI is {bmi}");
         }
     }
 }
