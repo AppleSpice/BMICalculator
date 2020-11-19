@@ -25,7 +25,7 @@
         <Button x:Name="xClear"  Content="Clear" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" Width="75" Click="xClear_Click"/>
         <Button x:Name="xSubmit" Content="Submit" HorizontalAlignment="Left" Margin="187,211,0,0" VerticalAlignment="Top" Width="75" Click="xSubmit_Click"/>
         <Button x:Name="xExit" Content="Exit" HorizontalAlignment="Left" Margin="707,211,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <DataGrid HorizontalAlignment="Left" Height="423" Margin="10,236,0,0" VerticalAlignment="Top" Width="772"/>
+        <DataGrid x:Name="xDataGrid" HorizontalAlignment="Left" Height="423" Margin="10,236,0,0" VerticalAlignment="Top" Width="772"/>
 
     </Grid>
 </Window>
